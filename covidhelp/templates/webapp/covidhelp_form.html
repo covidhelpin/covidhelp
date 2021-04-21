@@ -1,0 +1,28 @@
+{% load socialaccount %}
+<head>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+
+</head>
+<html>
+
+
+<body>
+<h1>Covid Help : Add patient details </h1>
+{% if user.is_authenticated %}
+  <p>
+  Welcome, You are logged in as {{ user.username|capfirst }}
+  <a href="{% url 'logout' %}">Logout</a>
+  </p> 
+  <form action ="" method="POST">
+  {% csrf_token %}
+  <table>
+  {{form.as_table}}
+  </table>
+
+  <button type="submit"> Submit</button>
+  </form>
+{% else %}
+  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+{% endif %}
+</body>
