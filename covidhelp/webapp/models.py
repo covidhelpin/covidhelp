@@ -25,6 +25,7 @@ REQUIREMENT_CHOICES = [
     ('O', 'Oxygen'),
     ('P', 'Plasma'),
     ('R', 'Remidisiver'),
+    ('F', 'Fabiflu'),
     ('M', 'Other Medicines'),
 ]
 
