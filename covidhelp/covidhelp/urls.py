@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path , include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
-from webapp.views import CovidHelpListView, CovidHelpCreateView
+from webapp.views import CovidHelpListView, CovidHelpCreateView, HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('accounts/',include('allauth.urls')),
     path('logout',LogoutView.as_view(), name="logout"),
-    path('', CovidHelpListView.as_view(), name="index"),
-    path('add/', CovidHelpCreateView.as_view(), name="CovidHelpAdd")
+    path('allpatients', CovidHelpListView.as_view(), name="index"),
+    path('add/', CovidHelpCreateView.as_view(), name="CovidHelpAdd"),
+    path('', HomeView, name="home"),
 ]

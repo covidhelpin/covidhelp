@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content_heading %} HomePage {% endblock content_heading%}
+
+
+
+{% block content_body %}
+<section class="section">
+  <div calss="container">
+    <h2 class="title">CovidHelp</h2>
+    <div class="columns">
+    <div class = "column">
+      <p class="subtitle">Availability <span class="tag">{{available_count}}</span></p>
+
+      <table class="table">
+      {% for item in available_list %}
+
+      <tr>
+        <td>
+        <a href="">
+          <span class="tag is-small is-danger">{{item.get_verified_display}} </span> {{item.patient_name}}</a>
+          <a href=>{{item}}</a> has <b>{{item.get_type_display}}</b> in <a href="">{{item.location}}</a><br> 
+          <small>Contact: {{item.contact_number}}</small>
+        </td>
+      </tr>
+
+      {% endfor %}
+      </table>
+    </div>
+
+    <div class = "column">
+    <p class="subtitle"> Help needed <span class="tag">{{help_count}}</span></p>
+    <table class="table">
+    {% for item in help_required_list %}
+
+    <tr>
+      <td>
+      <a href=""><span class="tag is-small is-danger">{{item.get_status_display}} </span> {{item.patient_name}}</a> requires <b>{{item.get_patient_requirements_display}}</b> in {{item.location_city}}<br>
+      <small> Posted : {{item.date|timesince}} ago [{{item.patient_contact_no}}] <a href="">edit</a> </small>
+      </td>
+    </tr>
+
+    {% endfor %}
+    </table>
+  </div>
+
+  </div>
+  </div>
+</section>
+{% endblock content_body %}
