@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from django.shortcuts import render, reverse
-from webapp.models import CovidHelp, Available
+from webapp.models import CovidHelp, Available, Link
 
 # Create your views here.
 
@@ -42,6 +42,22 @@ class CovidHelpUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid (self,form):
         return super().form_valid(form)
 
+class CovidHelpDetailsView(DetailView):
+    model = CovidHelp
+
+class AvailableDetailsView(DetailView):
+    model = Available
+
+class AvailableListView(ListView):
+    model = Available
+    template_name="webapp/available_list.html"
+
+class AvailableCityListView(ListView):
+    model = Available
+
+    def get_queryset(self):
+        return Available.objects.filter(location=self.kwargs['location'])
+
 
 
 def HomeView(request):
@@ -49,10 +65,12 @@ def HomeView(request):
     help_count=help_required_list.count()
     available_list = Available.objects.all()
     available_count=available_list.count()
+    link_list = Link.objects.all()
     context = {
         'help_required_list' : help_required_list,
         'help_count':help_count,
         'available_list' : available_list,
         'available_count' : available_count,
+        'link_list' : link_list,
     }
     return render(request, 'index.html',context)

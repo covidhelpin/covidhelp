@@ -26,6 +26,8 @@ REQUIREMENT_CHOICES = [
     ('P', 'Plasma'),
     ('R', 'Remidisiver'),
     ('F', 'Fabiflu'),
+    ('V', 'Favipiravir'),
+    ('T', 'Tiffin'),
     ('M', 'Other Medicines'),
 ]
 
@@ -83,3 +85,10 @@ class Available(models.Model):
 
     class Meta:
         ordering =["-last_verified"]
+
+class Link(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name

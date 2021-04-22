@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content_heading %} HomePage : City List {% endblock content_heading %}
+
+{% block content_menu %} {% endblock content_menu %}
+
+{% block content_body %}
+
+<p id="available" class="subtitle">Availability </p>
+</div>
+  <div class="columns">
+
+  <div class = "column">
+<table class="table">
+{% for item in object_list %}
+<tr>
+  <td>
+  <a href="">
+    {% if item.verified == "V" %}
+      <span class="tag is-small is-success">{{item.get_verified_display}} </span> </a>
+    {% else %}
+      <span class="tag is-small is-danger">{{item.get_verified_display}} </span>
+    {% endif %}
+    <a href="{% url "available_details" item.pk %}">{{item}}</a> has <b>{{item.get_type_display}}</b> in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a><br>
+    <small>Contact: {{item.contact_number}}<br>
+    <div class="block">{{item.additional_text}}</div>
+    Last update : {{item.last_verified|timesince}}</small>
+
+  </td>
+</tr>
+{% endfor %}
+<table>
+  </div>
+  </div>
+
+
+{% endblock content_body %}

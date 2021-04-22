@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content_heading %} HomePage : Patient Details {% endblock content_heading %}
+
+{% block content_menu %} {% endblock content_menu %}
+
+{% block content_body %}
+
+<table class="table">
+  <tr>
+      <td>type</td><td>{{object.get_type_display}}</td>
+  </tr>
+  <tr>
+      <td>contact_name</td><td>{{object.contact_name}}</td>
+  </tr>
+  <tr>
+      <td>contact_number</td><td>{{object.contact_number}}</td>
+  </tr>
+  <tr>
+      <td>location</td><td>{{object.location}}</td>
+  </tr>
+  <tr>
+      <td>verified</td><td>{{object.get_verified_display}}</td>
+  </tr>
+  <tr>
+      <td>last_verified</td><td>{{object.last_verified}}</td>
+  </tr>
+  <tr>
+      <td>additional_text</td><td>{{object.additional_text}}</td>
+  </tr>
+
+
+</table>
+
+
+{% endblock content_body %}
