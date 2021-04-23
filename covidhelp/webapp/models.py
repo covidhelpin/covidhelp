@@ -20,17 +20,6 @@ BLOODGROUP_CHOICES = [
     ('ANY','ANY'),
 ]
 
-REQUIREMENT_CHOICES = [
-    ('B', 'Bed'),
-    ('I', 'ICU'),
-    ('O', 'Oxygen'),
-    ('P', 'Plasma'),
-    ('R', 'Remidisiver'),
-    ('F', 'Fabiflu'),
-    ('V', 'Favipiravir'),
-    ('T', 'Tiffin'),
-    ('M', 'Other Medicines'),
-]
 
 STATUS_CHOICES = [
     ('O', 'Open'),
@@ -56,8 +45,7 @@ class CovidHelp(models.Model):
     patient_age = models.CharField(max_length=3)
     patient_blood_group = models.CharField(max_length=3, choices = BLOODGROUP_CHOICES, default="ANY")
     patient_sp02_level = models.CharField(max_length=2)
-    #patient_requirements = models.CharField(max_length=1, choices = REQUIREMENT_CHOICES)
-    patient_requirements_link = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
+    patient_requirements = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
 
 
     alternate_contact = models.CharField(blank=True, max_length=100)
@@ -81,8 +69,7 @@ class CovidHelp(models.Model):
         ordering = ["-date"]
 
 class Available(models.Model):
-    #type = models.CharField(max_length=1,choices = REQUIREMENT_CHOICES)
-    type_link = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
+    type = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
     contact_name = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=10)
     location = models.CharField(max_length=30)

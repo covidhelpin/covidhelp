@@ -21,7 +21,7 @@
     {% else %}
       <span class="tag is-small is-danger">{{item.get_verified_display}} </span>
     {% endif %}
-    <a href="{% url "available_details" item.pk %}">{{item}}</a> has <b>{{item.get_type_display}}</b> in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a><br>
+    <a href="{% url "available_details" item.pk %}">{{item}}</a> has <b>{{item.type}}</b> in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a><br>
     <small>Contact: {{item.contact_number}}<br>
     <div class="block">{{item.additional_text}}</div>
     Last update : {{item.last_verified|timesince}}</small>
