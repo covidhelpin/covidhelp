@@ -33,14 +33,14 @@ VERIFIED_CHOICES = [
 ]
 
 class Requirements(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.name
 
 class CovidHelp(models.Model):
     patient_name = models.CharField(max_length=100)
-    patient_contact_no = models.CharField(max_length=10)
+    patient_contact_no = models.CharField(max_length=15)
     patient_email=models.EmailField(blank=True)
     patient_age = models.CharField(max_length=3)
     patient_blood_group = models.CharField(max_length=3, choices = BLOODGROUP_CHOICES, default="ANY")
@@ -49,7 +49,7 @@ class CovidHelp(models.Model):
 
 
     alternate_contact = models.CharField(blank=True, max_length=100)
-    alternate_contact_no = models.CharField(blank=True, max_length=10)
+    alternate_contact_no = models.CharField(blank=True, max_length=15)
 
     location_city = models.CharField(max_length=30, help_text="The city where the patient needs help")
     location_hospital=models.CharField(blank=True, max_length=100, help_text="If the patient is aleady in a hospital")
@@ -71,7 +71,7 @@ class CovidHelp(models.Model):
 class Available(models.Model):
     type = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
     contact_name = models.CharField(max_length=100)
-    contact_number = models.CharField(max_length=10)
+    contact_number = models.CharField(max_length=15)
     location = models.CharField(max_length=30)
     verified = models.CharField(max_length=1, choices=VERIFIED_CHOICES, default='U')
     last_verified = models.DateTimeField(auto_now=True)
