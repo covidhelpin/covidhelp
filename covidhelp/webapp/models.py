@@ -56,7 +56,7 @@ class CovidHelp(models.Model):
     patient_age = models.CharField(max_length=3)
     patient_blood_group = models.CharField(max_length=3, choices = BLOODGROUP_CHOICES, default="ANY")
     patient_sp02_level = models.CharField(max_length=2)
-    patient_requirements = models.CharField(max_length=1, choices = REQUIREMENT_CHOICES)
+    #patient_requirements = models.CharField(max_length=1, choices = REQUIREMENT_CHOICES)
     patient_requirements_link = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
 
 
@@ -81,7 +81,7 @@ class CovidHelp(models.Model):
         ordering = ["-date"]
 
 class Available(models.Model):
-    type = models.CharField(max_length=1,choices = REQUIREMENT_CHOICES)
+    #type = models.CharField(max_length=1,choices = REQUIREMENT_CHOICES)
     type_link = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
     contact_name = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=10)
