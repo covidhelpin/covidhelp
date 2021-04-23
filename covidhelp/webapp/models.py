@@ -76,6 +76,7 @@ class Available(models.Model):
     verified = models.CharField(max_length=1, choices=VERIFIED_CHOICES, default='U')
     last_verified = models.DateTimeField(auto_now=True)
     additional_text=models.TextField(blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.contact_name

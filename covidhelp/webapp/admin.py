@@ -4,10 +4,10 @@ from webapp.models import CovidHelp, Available, Link, Requirements
 # Register your models here.
 
 class AvailableAdmin(admin.ModelAdmin):
-    list_display=('type','contact_name','contact_number','location','verified','last_verified')
+    list_display=('type','contact_name','contact_number','location','verified','last_verified','created_by')
 
 class CovidHelpAdmin(admin.ModelAdmin):
-    list_display=('patient_name','patient_requirements')
+    list_display=('patient_name','patient_requirements','created_by')
 
 
 admin.site.register(CovidHelp, CovidHelpAdmin)

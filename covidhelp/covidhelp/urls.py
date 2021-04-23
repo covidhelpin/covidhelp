@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path , include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
-from webapp.views import CovidHelpListView, CovidHelpCreateView, HomeView, CovidHelpDetailsView, AvailableDetailsView, AvailableCityListView, AvailableListView
+from webapp.views import CovidHelpListView, CovidHelpCreateView, HomeView, CovidHelpDetailsView, AvailableDetailsView, AvailableCityListView, AvailableListView, AvailableCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,10 +25,11 @@ urlpatterns = [
     path('accounts/',include('allauth.urls')),
     path('logout',LogoutView.as_view(), name="logout"),
     path('allpatients', CovidHelpListView.as_view(), name="index"),
-    path('add/', CovidHelpCreateView.as_view(), name="CovidHelpAdd"),
+    path('add/patient', CovidHelpCreateView.as_view(), name="add_patient"),
     path('', HomeView, name="home"),
     path('patient/<pk>/', CovidHelpDetailsView.as_view(), name="covidhelp_details"),
     path('available/<pk>/', AvailableDetailsView.as_view(), name="available_details"),
     path('city/<location>', AvailableCityListView.as_view(), name="available_city_lists"),
     path('available/', AvailableListView.as_view(), name="available_lists"),
+    path('add/available',AvailableCreateView.as_view(), name="add_available"),
 ]

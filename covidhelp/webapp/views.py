@@ -31,7 +31,7 @@ class CovidHelpCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse("index")
+        return reverse("home")
 
 class CovidHelpUpdateView(LoginRequiredMixin, UpdateView):
     model = CovidHelp
@@ -58,7 +58,19 @@ class AvailableCityListView(ListView):
     def get_queryset(self):
         return Available.objects.filter(location=self.kwargs['location'])
 
+class AvailableCreateView(LoginRequiredMixin, CreateView):
+    model = Available
+    fields = [
+        "type",
+        "contact_name",
+        "contact_number",
+        "location",
+        "verified",
+        "additional_text"
+    ]
 
+    def get_success_url(self):
+        return reverse('home')
 
 def HomeView(request):
     help_required_list = CovidHelp.objects.filter(status='O')

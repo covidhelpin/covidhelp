@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block content_heading %} Add Patient Details {% endblock content_heading %}
+{% block content_heading %} Add Availability {% endblock content_heading %}
 
 {% block content_menu %} {% endblock content_menu %}
 
 {% block content_body %}
 
 <div class="section">
-<h1 class="subtitle">Add Patient Details</h1>
-<code> Add as much details as you can</code>
-
+<h1 class="subtitle">Add Availability </h1>
+<code> Please make sure that you are having the correct information</code>
+{% if user.is_authenticated %}
   <form action ="" method="POST">
   {% csrf_token %}
   <table class="table">
@@ -18,6 +18,8 @@
 
   <button type="submit"> Submit</button>
   </form>
-
-
+{% else %}
+  <a href="{% url "account_login" %}">You need to login</a>
+{% endif %}
+</div>
 {% endblock content_body %}
