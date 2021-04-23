@@ -17,6 +17,7 @@ BLOODGROUP_CHOICES = [
     ('O-','O-'),
     ('O','O'),
     ('O+','O+'),
+    ('ANY','ANY'),
 ]
 
 REQUIREMENT_CHOICES = [
@@ -42,14 +43,22 @@ VERIFIED_CHOICES = [
     ('F', 'Fake')
 ]
 
+class Requirements(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
 class CovidHelp(models.Model):
     patient_name = models.CharField(max_length=100)
     patient_contact_no = models.CharField(max_length=10)
     patient_email=models.EmailField(blank=True)
     patient_age = models.CharField(max_length=3)
-    patient_blood_group = models.CharField(max_length=3, choices = BLOODGROUP_CHOICES)
+    patient_blood_group = models.CharField(max_length=3, choices = BLOODGROUP_CHOICES, default="ANY")
     patient_sp02_level = models.CharField(max_length=2)
     patient_requirements = models.CharField(max_length=1, choices = REQUIREMENT_CHOICES)
+    patient_requirements_link = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
+
 
     alternate_contact = models.CharField(blank=True, max_length=100)
     alternate_contact_no = models.CharField(blank=True, max_length=10)
@@ -73,6 +82,7 @@ class CovidHelp(models.Model):
 
 class Available(models.Model):
     type = models.CharField(max_length=1,choices = REQUIREMENT_CHOICES)
+    type_link = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
     contact_name = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=10)
     location = models.CharField(max_length=30)
