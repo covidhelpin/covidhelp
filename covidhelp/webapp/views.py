@@ -50,6 +50,7 @@ class AvailableDetailsView(DetailView):
 
 class AvailableListView(ListView):
     model = Available
+    ordering = ['type']
     template_name="webapp/available_list.html"
 
 class AvailableCityListView(ListView):

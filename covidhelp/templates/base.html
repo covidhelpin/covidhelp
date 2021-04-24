@@ -14,6 +14,7 @@
         <div class="title">CovidHelp</div>
       </a>
 
+
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -21,20 +22,18 @@
       </a>
     </div>
 
-<!--    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
+        <a class="navbar-item" href="{% url 'available_lists' %}">
           Available
         </a>
 
-        <a class="navbar-item">
-          Help Needed
+        <a class="navbar-item" href="{% url 'patient_lists'%}">
+          Help needed
         </a>
-        <a class="navbar-item">
-          Useful Links
-        </a>
+
       </div>
-    </div>-->
+    </div>
       <div class="navbar-end">
         <div class="navbar-item">
             <div class="buttons">
@@ -55,9 +54,18 @@
       </div>
     </div>
   </nav>
-
+  <code> DISCLAIMER : This site is run by volunteers. Please verify the data and update responsibly. </code>
   {% block content_menu %} {% endblock content_menu %}
   {% block content_body %} {% endblock content_body %}
+
+  <!-- Footer section -->
+  <footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>CovidHelpIn</strong> by <a href="www.twitter.com/vibhurishi">@vibhurishi</a>. A small effort for the massive fight against the Covid-19 pandemic.
+    </p>
+  </div>
+  </footer>
 </body>
 
 </html>

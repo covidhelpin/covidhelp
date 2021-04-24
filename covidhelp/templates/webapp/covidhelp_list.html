@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-{% load socialaccount %}
-<head>
-	<title>Covid Help</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+{% extends "base.html" %}
 
+{% block content_heading %} Patients needing help {% endblock content_heading %}
 
-</head>
-<html>
+{% block content_menu %} {% endblock content_menu %}
 
-<body>
-	<h1> List of people needing help </h1>
-  <button><a href="{% url 'CovidHelpAdd' %}">Add Patient Detail</a></button>
+{% block content_body %}
 
-  <table>
+<h1 class="title"> Patients needing help</h1>
+
+  <button class="button"><a href="{% url 'add_patient' %}">Add Patient Detail</a></button>
+
+  <table class="table">
 	  <tr>
 		<th>Required</th>
 		<th>Patient Name</th>
@@ -49,6 +47,4 @@
 	{% endfor %}
   </table>
 
-</body>
-
-</html>
+{% endblock content_body %}
