@@ -5,17 +5,17 @@
 {%block content_menu%}
 <div class="box is-hidden-desktop">
   Quick jump:
-<a href="#available">
-  Available
-</a>
-/
-<a href="#helpneeded">
-  Help Needed
-</a>
-/
-<a href="#links">
-  Useful Links
-</a>
+  <a href="#available">
+    Available
+  </a>
+  /
+  <a href="#helpneeded">
+    Help Needed
+  </a>
+  /
+  <a href="#links">
+    Useful Links
+  </a>
 </div>
 {%endblock content_menu %}
 
@@ -24,80 +24,94 @@
 
 <p><code>Note: Click on name for more details. Click on city for list in city.</code></p>
 <section class="section">
-
-    <div class="columns">
-
-    <!--- AVAILABILITY -->
-    <div class = "column">
-        <article class="message">
-          <div class="message-header has-background-white has-text-black has-text-link">
+  <div class = "columns">
+    <div class="column is-one-third">  <!-- Available start -->
+      <article class="message">
+          <div class="message-header ">
             <p><a id="available" class="subtitle" href="{% url 'available_lists' %}">Availability</a> <span class="tag"> {{available_count}} </span></p>
             <a href="{% url "add_available" %}" class="button is-small is-rounded">+ Add</a>
-
           </div>
-        </article>
+      </article>
+      <!-- content -->
+      {% regroup available_list by type as type_list %}
+        <div id="tabs-with-content">
+          <div class="tabs avail-tabs is-centered">
+            <ul>
+              {% for types in type_list %}
+              <li>
+                <a>{{types.grouper}}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
 
-      {% for item in available_list %}
-          {% if item.verified == "V" %}
-          <article class="message is-success">
-          {% elif item.verified == "U" %}
-          <article class="message is-warning">
-          {% else %}
-          <article class="message is-danger">
-          {% endif %}
-            <div class="message-header">
-              <p><a href="{% url "available_details" item.pk %}">{{item}}</a> has <b>{{item.type}}</b> in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a></p>
-              <span class="tag" >{{item.get_verified_display}}</span>
-            </div>
-
-            <div class="message-body">
-              <small>Contact: {{item.contact_number}}<br>
-              {% if item.additional_text %}
-              {{item.additional_text|linebreaksbr}}<br>
+        <!-- tab content -->
+        <div>
+        {% for types in type_list %}
+          <section class="available-tab-content">
+            {% for item in types.list %}
+            {% if item.verified == "V" %}
+              <div class="tag is-success">
+              {% elif item.verified == "U" %}
+              <div class="tag is-warning">
+              {% else %}
+              <div class="tag is-danger">
               {% endif %}
-              <small>Last update : {{item.last_verified|timesince}}</small>, added by {{item.created_by|capfirst}}</small>
-            </div>
-          </article>
-      {% endfor %}
-    </div>
-
-    <!--- HELP NEEDED ---->
-    <div class = "column">
-    <article class="message">
-      <div class="message-header has-background-white has-text-black has-text-link">
-        <p> <a id="helpneeded" class="subtitle" href="{% url 'patient_lists'%}">Help needed</a> <span class="tag">{{help_count}}</span></p>
-        <a href="{% url "add_patient" %}" class="button is-small is-rounded">+ Add</a>
-      </div>
-    </article>
-
-    {% for item in help_required_list %}
-      {% if item.type == "C" %}
-      <article class="message is-success">
-      {% else %}
-      <article class="message is-warning">
-      {% endif %}
-        <div class="message-header">
-          <p><a href="{% url "covidhelp_details" item.pk %}">{{item.patient_name}}</a> [{{item.patient_contact_no}}] requires <b>{{item.patient_requirements}}</b> in {{item.location_city}}</p>
-          <span class="tag is-small">{{item.get_status_display}} </span>
+              {{item.get_verified_display}}
+              </div>
+              <a href="{% url "available_details" item.pk %}">{{item}}</a> [{{item.contact_number}}] in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a><br>
+              <small class="is-pulled-right">Last update : {{item.last_verified|timesince}} ago</small>
+              <hr>
+            {% endfor %}
+          </section>
+        {% endfor %}
         </div>
-        <div class="message-body">
-          <small>SPO2 : <strong>{{item.patient_sp02_level}}</strong> / BG : <strong>{{item.patient_blood_group}}</strong> / Age : <strong>{{item.patient_age}}</strong><br>
-          <!--{% if item.additional_text %}
-          {{item.additional_text|linebreaksbr}}<br>
-          {% endif %}-->
-          <small>Posted : {{item.date|timesince}} ago, added by {{item.created_by|capfirst}}</small></small>
+      </div>
+    </div>                <!-- Available end -->
+
+    <div class="column is-one-third">  <!-- Required start -->
+      <article class="message">
+        <div class="message-header">
+          <p> <a id="helpneeded" class="subtitle" href="{% url 'patient_lists'%}">Help needed</a> <span class="tag">{{help_count}}</span></p>
+          <a href="{% url "add_patient" %}" class="button is-small is-rounded">+ Add</a>
         </div>
       </article>
-    {% endfor %}
-    </div>
+      <!-- content -->
+      {% regroup help_required_list by patient_requirements as help_list %}
 
-    <div class = "column">
+        {% for patient_requirements in help_list %}
+        <p class="panel-heading">
+          <b>{{patient_requirements.grouper}} Required</b>
+          </p>
+          <hr>
+            {% for item in patient_requirements.list %}
+              <a href="{% url "covidhelp_details" item.pk %}">{{item.patient_name}}</a> [{{item.patient_contact_no}}] in {{item.location_city}} <br>
+              <small>SPO2 : <strong>{{item.patient_sp02_level}}</strong> / BG : <strong>{{item.patient_blood_group}}</strong> / Age : <strong>{{item.patient_age}}</strong></small><br>
+              <small class="is-pulled-right">Updated {{item.date|timesince}} ago by <i>{{item.created_by}}</i>.
+                Status is
+                {% if item.type == "C" %}
+                  <div class="tag is-success">
+                  {% else %}
+                  <div class="tag is-warning">
+                  {% endif %}
+                  {{item.get_status_display}}
+                  </div>
+                </small>
+              <hr>
+            {% endfor %}
+        {% endfor %}
+
+    </div>                <!-- Required end -->
+
+    <div class="column is-one-third"">  <!-- Links start -->
+      <!-- header -->
       <article class="message">
-        <div class="message-header has-background-white has-text-black has-text-link">
-          <p id="links" class="subtitle"> Useful Links </p>
+        <div class="message-header">
+          <p><a id="links" class="subtitle"> Useful Links </a> </p>
           </div>
       </article>
-
+      <!-- content -->
+      <div class="content">
       <ul>
         {%for item in link_list%}
         <li>
@@ -106,9 +120,10 @@
         {% endfor %}
 
       </ul>
-    </div>
+      </div>
+    </div>                <!-- Links end -->
 
-  </div>
+  </div> <!-- columns -->
 
 </section>
 {% endblock content_body %}

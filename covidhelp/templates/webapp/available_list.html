@@ -6,42 +6,60 @@
 
 {% block content_body %}
 
-<h1 class="title">Availability </h1>
-  <button class="button"><a href="{% url 'add_available' %}">Add Availability</a></button>
-</div>
+  <div class ="columns">
+    <div class="column">
+      <div class="subtitle">Availability </div>
+      <button class="button"><a href="{% url 'add_available' %}">Add Availability</a></button>
+    </div>
+  </div>
+
   <div class="columns">
 
   <div class = "column">
     {% regroup object_list by type as type_list %}
+    <div id="tabs-with-content">
+      <div class="tabs avail-tabs is-centered">
+        <ul>
+          {% for types in type_list %}
+          <li><a>{{types.grouper}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
 
-    {% for types in type_list %}
-    <div class="subtitle">{{types.grouper}}</div>
-
-    {% for item in types.list %}
-
-        {% if item.verified == "V" %}
-        <article class="message is-success">
-        {% elif item.verified == "U" %}
-        <article class="message is-warning">
-        {% else %}
-        <article class="message is-danger">
-        {% endif %}
-          <div class="message-header">
-            <p><a href="{% url "available_details" item.pk %}">{{item}}</a> has <b>{{item.type}}</b> in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a></p>
-            <span class="tag" aria-label="delete">{{item.get_verified_display}}</span>
-          </div>
-          <div class="message-body">
-            <small>Contact: {{item.contact_number}}<br>
-            {% if item.additional_text %}
-            {{item.additional_text|linebreaksbr}}<br>
+        {% for types in type_list %}
+          <section class="available-tab-content">
+          {% for item in types.list %}
+            {% if item.verified == "V" %}
+            <article class="message is-success">
+            {% elif item.verified == "U" %}
+            <article class="message is-warning">
+            {% else %}
+            <article class="message is-danger">
             {% endif %}
-            <small>Last update : {{item.last_verified|timesince}} ago</small>
-          </div>
-        </article>
-    {% endfor %}
-  {% endfor %}
+              <div class="message-header">
+                <p><a href="{% url "available_details" item.pk %}">{{item}}</a> has <b>{{item.type}}</b> in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a></p>
+                <span class="tag" aria-label="delete">{{item.get_verified_display}}</span>
+              </div>
+              <div class="message-body">
+                <small>Contact: {{item.contact_number}}<br>
+                {% if item.additional_text %}
+                {{item.additional_text|linebreaksbr}}<br>
+                {% endif %}
+                <small>Last update : {{item.last_verified|timesince}} ago</small>
+              </div>
+            </article>
+          {% endfor %}
+          </section>
+        {% endfor %}
+      </div>
+    </div>
+
+
   </div>
   </div>
+
+
 
 
 {% endblock content_body %}

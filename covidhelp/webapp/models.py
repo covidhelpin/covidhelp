@@ -38,6 +38,9 @@ class Requirements(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 class CovidHelp(models.Model):
     patient_name = models.CharField(max_length=100)
     patient_contact_no = models.CharField(max_length=15)
@@ -66,7 +69,7 @@ class CovidHelp(models.Model):
 
 
     class Meta:
-        ordering = ["-date"]
+        ordering = ["patient_requirements","-date"]
 
 class Available(models.Model):
     type = models.ForeignKey(Requirements, on_delete=models.CASCADE, null=True, blank=True)
@@ -82,7 +85,7 @@ class Available(models.Model):
         return self.contact_name
 
     class Meta:
-        ordering =["-last_verified"]
+        ordering =["type","-last_verified"]
 
 class Link(models.Model):
     name = models.CharField(max_length=100)

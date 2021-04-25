@@ -10,6 +10,8 @@ class CovidHelpListView(ListView):
 
 class CovidHelpCreateView(LoginRequiredMixin, CreateView):
     model = CovidHelp
+    required_css_class = 'required'
+
     fields = [
         'patient_requirements',
         'patient_name',
@@ -24,7 +26,6 @@ class CovidHelpCreateView(LoginRequiredMixin, CreateView):
         'location_hospital',
         'additional_text',
     ]
-    paginate_by = 2
 
     def form_valid (self,form):
         form.instance.created_by = self.request.user
