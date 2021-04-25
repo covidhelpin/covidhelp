@@ -47,10 +47,11 @@
       <td>Date Created</td><td>{{object.date}}</td>
   </tr>
   <tr>
-      <td>additional_text</td><td>{{object.additional_text}}</td>
+      <td>Additional Details</td><td>{{object.additional_text}}</td>
   </tr>
 
 </table>
 
+<a href="{% url "update_patient" object.pk %}">[Edit]</a>
 
 {% endblock content_body %}

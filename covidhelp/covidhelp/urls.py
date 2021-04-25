@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path , include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
-from webapp.views import CovidHelpListView, CovidHelpCreateView, HomeView, CovidHelpDetailsView, AvailableDetailsView, AvailableCityListView, AvailableListView, AvailableCreateView
+from webapp.views import HomeView, \
+    CovidHelpListView, CovidHelpCreateView, CovidHelpDetailsView, CovidHelpUpdateView, \
+    AvailableDetailsView, AvailableCityListView, AvailableListView, AvailableCreateView, AvailableUpdateView, \
+    LinkCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,10 +32,14 @@ urlpatterns = [
     path('patients/', CovidHelpListView.as_view(), name="patient_lists"),
     path('patients/<pk>/', CovidHelpDetailsView.as_view(), name="covidhelp_details"),
     path('patients/add', CovidHelpCreateView.as_view(), name="add_patient"),
+    path('patients/add/<int:pk>', CovidHelpUpdateView.as_view(), name="update_patient"),
 
     path('available/', AvailableListView.as_view(), name="available_lists"),
     path('available/<pk>/', AvailableDetailsView.as_view(), name="available_details"),
     path('available/add',AvailableCreateView.as_view(), name="add_available"),
+    path('available/add/<int:pk>/', AvailableUpdateView.as_view(), name="update_available"),
+
+    path('link/add' , LinkCreateView.as_view(), name="add_link"),
 
     path('city/<location>', AvailableCityListView.as_view(), name="available_city_lists"),
 

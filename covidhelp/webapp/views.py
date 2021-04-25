@@ -37,11 +37,29 @@ class CovidHelpCreateView(LoginRequiredMixin, CreateView):
 class CovidHelpUpdateView(LoginRequiredMixin, UpdateView):
     model = CovidHelp
     fields = [
+        'patient_requirements',
+        'patient_name',
+        'patient_contact_no',
+        'patient_email',
+        'patient_age',
+        'patient_blood_group',
+        'patient_sp02_level',
+        'alternate_contact',
+        'alternate_contact_no',
+        'location_city',
+        'location_hospital',
         'additional_text',
+        'status',
     ]
+
+    template_name = "webapp/covidhelp_form.html"
 
     def form_valid (self,form):
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('covidhelp_details', args=[self.object.pk])
+
 
 class CovidHelpDetailsView(DetailView):
     model = CovidHelp
@@ -69,6 +87,38 @@ class AvailableCreateView(LoginRequiredMixin, CreateView):
         "location",
         "verified",
         "additional_text"
+    ]
+
+    def form_valid (self,form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('home')
+
+class AvailableUpdateView(LoginRequiredMixin, UpdateView):
+    model = Available
+    fields = [
+        "type",
+        "contact_name",
+        "contact_number",
+        "location",
+        "verified",
+        "additional_text"
+    ]
+    template_name = "webapp/available_form.html"
+
+    def form_valid (self,form):
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('available_details', args=[self.object.pk])
+
+class LinkCreateView(LoginRequiredMixin, CreateView):
+    model = Link
+    fields = [
+        "name",
+        "url",
     ]
 
     def form_valid (self,form):

@@ -30,7 +30,7 @@
 	{% for item in object_list %}
 	<tr>
 		<td>{{item.patient_requirements}}</td>
-		<td>{{item.patient_name}}</td>
+		<td><a href="{% url "covidhelp_details" item.pk %}">{{item.patient_name}}</a></td>
 		<td>{{item.patient_contact_no}}</td>
 		<td>{{item.patient_age}}</td>
 		<td>{{item.patient_blood_group}}</td>
