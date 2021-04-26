@@ -44,7 +44,7 @@
               <div class="message-body">
                 <small>Contact: {{item.contact_number}}<br>
                 {% if item.additional_text %}
-                {{item.additional_text|linebreaksbr}}<br>
+                {{item.additional_text|urlize|linebreaksbr}}<br>
                 {% endif %}
                 <small>Last update : {{item.last_verified|timesince}} ago</small>
               </div>
