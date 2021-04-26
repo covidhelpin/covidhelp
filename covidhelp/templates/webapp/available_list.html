@@ -8,10 +8,21 @@
 
   <div class ="columns">
     <div class="column">
-      <div class="subtitle">Availability </div>
-      <button class="button"><a href="{% url 'add_available' %}">Add Availability</a></button>
+      <article class="message">
+          <div class="message-header ">
+            <p><a id="available" class="subtitle" href="{% url 'available_lists' %}">Availability</a>
+              {% if available_count %}<span class="tag"> {{available_count}} </span>{% endif %}</p> 
+            <a href="{% url "add_available" %}" class="button is-small is-rounded">+ Add Availability</a>
+          </div>
+      </article>
+
     </div>
+
+
+
   </div>
+
+
 
   <div class="columns">
 
