@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content_heading %} HomePage : Patient Details {% endblock content_heading %}
+{% block content_heading %} {{object.patient_name}} {% endblock content_heading %}
 
 {% block content_menu %} {% endblock content_menu %}
 
@@ -47,7 +47,7 @@
       <td>Date Created</td><td>{{object.date}}</td>
   </tr>
   <tr>
-      <td>Additional Details</td><td>{{object.additional_text|linebreaksbr}}</td>
+      <td>Additional Details</td><td>{{object.additional_text|urlize|linebreaksbr}}</td>
   </tr>
 
 </table>
