@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content_heading %} HomePage : Patient Details {% endblock content_heading %}
+{% block content_heading %} {{object.contact_name}} {% endblock content_heading %}
 
 {% block content_menu %} {% endblock content_menu %}
 
@@ -26,7 +26,7 @@
       <td>last_verified</td><td>{{object.last_verified}}</td>
   </tr>
   <tr>
-      <td>Additional Information</td><td>{{object.additional_text|linebreaksbr}}</td>
+      <td>Additional Information</td><td>{{object.additional_text|urlize|linebreaksbr}}</td>
   </tr>
 
 
