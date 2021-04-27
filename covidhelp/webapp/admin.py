@@ -1,5 +1,5 @@
 from django.contrib import admin
-from webapp.models import CovidHelp, Available, Link, Requirements
+from webapp.models import CovidHelp, Available, Link, Requirements, LinkCategory
 
 # Register your models here.
 
@@ -9,8 +9,11 @@ class AvailableAdmin(admin.ModelAdmin):
 class CovidHelpAdmin(admin.ModelAdmin):
     list_display=('patient_name','patient_requirements','created_by')
 
+class LinkAdmin(admin.ModelAdmin):
+    list_display=('name','url','user')
 
 admin.site.register(CovidHelp, CovidHelpAdmin)
 admin.site.register(Available, AvailableAdmin)
-admin.site.register(Link)
+admin.site.register(Link, LinkAdmin)
 admin.site.register(Requirements)
+admin.site.register(LinkCategory)

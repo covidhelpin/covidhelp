@@ -87,9 +87,22 @@ class Available(models.Model):
     class Meta:
         ordering =["type","-last_verified"]
 
+# Used in categorizing the links
+class LinkCategory(models.Model):
+    category=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.category
+
+    class Meta:
+        ordering=['category']
+
 class Link(models.Model):
     name = models.CharField(max_length=100)
-    url = models.URLField()
+    url = models.URLField(unique=True)
+    #category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name
