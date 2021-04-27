@@ -99,7 +99,7 @@ class LinkCategory(models.Model):
 
 class Link(models.Model):
     name = models.CharField(max_length=100)
-    url = models.URLField(unique=True)
+    url = models.URLField()
     #category = models.ForeignKey(LinkCategory, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
