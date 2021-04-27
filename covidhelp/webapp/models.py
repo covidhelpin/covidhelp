@@ -100,7 +100,7 @@ class Category(models.Model):
 
 class Link(models.Model):
     name = models.CharField(max_length=100)
-    url = models.URLField()
+    url = models.URLField(unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
