@@ -126,11 +126,11 @@
                 {{item.name}}
                 </a>
                 {% if user.is_authenticated %}
-                  {% ifequal request.user item.created_by %}
+
                   <span class="is-size-7">
                   <small>[<a href="{% url "update_link" item.pk %}">Edit</a>]</small>
                   </span>
-                  {% endifequal %}
+
                 {% endif %}
               </li>
             {% endfor %}
