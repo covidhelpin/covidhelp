@@ -10,7 +10,7 @@ class CovidHelpAdmin(admin.ModelAdmin):
     list_display=('patient_name','patient_requirements','created_by')
 
 class LinkAdmin(admin.ModelAdmin):
-    list_display=('name','url',)
+    list_display=('name','url','created_by','category')
 
 admin.site.register(CovidHelp, CovidHelpAdmin)
 admin.site.register(Available, AvailableAdmin)

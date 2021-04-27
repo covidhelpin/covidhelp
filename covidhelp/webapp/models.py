@@ -87,16 +87,6 @@ class Available(models.Model):
     class Meta:
         ordering =["type","-last_verified"]
 
-class Link(models.Model):
-    name = models.CharField(max_length=100)
-    url = models.URLField()
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering=['name']
 
 class Category(models.Model):
     name=models.CharField(max_length=20)
@@ -106,3 +96,16 @@ class Category(models.Model):
 
     class Meta:
         ordering=['name']
+
+
+class Link(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering=['category','name']

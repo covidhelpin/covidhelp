@@ -113,14 +113,25 @@
       </article>
       <!-- content -->
       <div class="content">
-      <ul>
+        {% regroup link_list by category as links %}
+        {% for link in links %}
+        <p class="panel-block">
+          <b>{{link.grouper}}</b>
+          </p>
+          <ul>
+            {% for item in link.list %}
+              <li><a href="{{item.url}}" target="new">{{item.name}}</a></li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+      <!-- <ul>
         {%for item in link_list%}
         <li>
           <a href="{{item.url}}" target="new">{{item}}</a>
         </li>
         {% endfor %}
 
-      </ul>
+      </ul> -->
       </div>
     </div>                <!-- Links end -->
 
