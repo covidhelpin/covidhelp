@@ -6,9 +6,12 @@
 
 {% block content_body %}
 
-<h1 class="title"> Patients needing help</h1>
-
-  <button class="button"><a href="{% url 'add_patient' %}">Add Patient Detail</a></button>
+  <article class="message">
+    <div class="message-header">
+      <p> <a id="helpneeded" class="subtitle" href="{% url 'patient_lists'%}">Help needed</a> <span class="tag">{{help_count}}</span></p>
+      <a href="{% url "add_patient" %}" class="button is-small is-rounded">+ Add</a>
+    </div>
+  </article>
 
   <table class="table">
 	  <tr>
