@@ -129,6 +129,18 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('home')
 
+class LinkUpdateView(LoginRequiredMixin,UpdateView):
+    model=Link
+    fields = [
+        "name",
+        "url",
+        "category",
+    ]
+    template_name = "webapp/available_form.html"
+
+    def get_success_url(self):
+        return reverse('home')
+
 def HomeView(request):
     help_required_list = CovidHelp.objects.filter(status='O')
     help_count=help_required_list.count()

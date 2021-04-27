@@ -20,7 +20,7 @@ from django.contrib.auth.views import LogoutView
 from webapp.views import HomeView, \
     CovidHelpListView, CovidHelpCreateView, CovidHelpDetailsView, CovidHelpUpdateView, \
     AvailableDetailsView, AvailableCityListView, AvailableListView, AvailableCreateView, AvailableUpdateView, \
-    LinkCreateView
+    LinkCreateView, LinkUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,6 +40,8 @@ urlpatterns = [
     path('available/add/<int:pk>/', AvailableUpdateView.as_view(), name="update_available"),
 
     path('link/add' , LinkCreateView.as_view(), name="add_link"),
+    path('link/<int:pk>/edit' , LinkUpdateView.as_view(), name="update_link"),
+
 
     path('city/<location>', AvailableCityListView.as_view(), name="available_city_lists"),
 
