@@ -171,3 +171,6 @@ def HomeView(request):
 
 def ContributorsView(request):
     return render(request,"webapp/contributors.html")
+
+def TermsView(request):
+    return render(request,"webapp/terms_and_conditions.html")
