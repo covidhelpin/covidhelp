@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from django.shortcuts import render, reverse
+from django.db.models import Q
 from webapp.models import CovidHelp, Available, Link
 
 # Create your views here.
@@ -140,6 +141,18 @@ class LinkUpdateView(LoginRequiredMixin,UpdateView):
 
     def get_success_url(self):
         return reverse('home')
+
+class SearchResultsView(ListView):
+    model = Available
+    template_name = 'webapp/available_list.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Available.objects.filter(
+            Q(location__icontains=query) | Q(additional_text__icontains=query)
+        )
+        return object_list
+
 
 def HomeView(request):
     help_required_list = CovidHelp.objects.filter(status='O')

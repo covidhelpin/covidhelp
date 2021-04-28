@@ -20,7 +20,7 @@ from django.contrib.auth.views import LogoutView
 from webapp.views import HomeView, \
     CovidHelpListView, CovidHelpCreateView, CovidHelpDetailsView, CovidHelpUpdateView, \
     AvailableDetailsView, AvailableCityListView, AvailableListView, AvailableCreateView, AvailableUpdateView, \
-    LinkCreateView, LinkUpdateView, ContributorsView
+    LinkCreateView, LinkUpdateView, ContributorsView, SearchResultsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,7 +44,7 @@ urlpatterns = [
 
     path('contributors/', ContributorsView, name="contributors"),
 
-
+    path('city/', SearchResultsView.as_view(), name="search_results"),
     path('city/<location>', AvailableCityListView.as_view(), name="available_city_lists"),
 
 ]

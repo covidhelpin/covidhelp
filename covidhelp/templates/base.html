@@ -88,6 +88,17 @@
       </div>
     </div>
   </nav>
+  <!-- search box -->
+  <div class="box">
+        <form class="field has-addon" action={% url 'search_results' %} method="GET" value="{{request.GET.q}}">
+               <input class="" type="text" name="q" value ="{{request.GET.q}}" placeholder="City Search..." />
+               <input class="button is-info is-small" type="submit" value="Search">
+        </form>
+  </div>
+
+
+
+
 
   {% block content_menu %} {% endblock content_menu %}
   {% block content_body %} {% endblock content_body %}
