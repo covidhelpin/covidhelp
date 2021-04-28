@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content_heading %} {{object.contact_name}} {% endblock content_heading %}
+
+{% block content_menu %} {% endblock content_menu %}
+
+{% block content_body %}
+
+<div class ="columns">
+  <div class="column">
+    <article class="message">
+        <div class="message-header ">
+          <p>Contributors :</p>
+        </div>
+        <div class="message-body">
+          This site is run by the following volunteers:<br><br>
+          <b>Website Development</b><br>
+          The programming team is:
+          <ul>
+            <li>-> Vibhu Rishi <a href="https://twitter.com/vibhurishi"><span class="far icon-twitter"></span></a></li>
+          </ul>
+
+          <br><br>
+          <b>Domain Name</b><br>
+          Domain name has been contributed by:
+          <ul>
+            <li>-> Shashwat Khandelwal <a href="https://twitter.com/shashtag"><span class="far icon-twitter"></span></a></li>
+          </ul>
+        </div>
+    </article>
+  </div>
+</div>
+
+
+
+
+{% endblock content_body %}

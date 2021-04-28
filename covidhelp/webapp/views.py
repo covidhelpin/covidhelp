@@ -155,3 +155,6 @@ def HomeView(request):
         'link_list' : link_list,
     }
     return render(request, 'index.html',context)
+
+def ContributorsView(request):
+    return render(request,"webapp/contributors.html")

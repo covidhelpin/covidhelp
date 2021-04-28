@@ -6,7 +6,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <!--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
   <style>
 
 
@@ -64,12 +64,15 @@
         <a class="navbar-item" href="{% url 'patient_lists'%}">
           Help needed
         </a>
+        <a class="navbar-item" href="{% url 'contributors' %}">
+          Contributors
+        </a>
 
       </div>
     </div>
       <div class="navbar-end">
         <div class="navbar-item">
-            <div class="buttons">
+          <div class="buttons">
           {% if user.is_authenticated %}
             Logged in as &nbsp; <strong>{{ user|capfirst }}</strong> [ <a href="{% url 'logout' %}">Logout</a> ]
           {% else %}
@@ -80,8 +83,6 @@
               Log in
             </a>
           {% endif %}
-
-
           </div>
         </div>
       </div>

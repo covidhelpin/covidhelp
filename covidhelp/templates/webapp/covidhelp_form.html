@@ -7,8 +7,12 @@
 {% block content_body %}
 
 <div class="section">
-<h1 class="subtitle">Add Patient Details</h1>
-<code> Add as much details as you can</code>
+  <article class="message">
+      <div class="message-header ">
+        <p> Patient Details</p>
+        <code>Add as much details as you can</code>
+      </div>
+  </article>
 
   <form action ="" method="POST">
   {% csrf_token %}

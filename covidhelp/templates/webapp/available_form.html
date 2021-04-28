@@ -7,8 +7,13 @@
 {% block content_body %}
 
 <div class="section">
-<h1 class="subtitle">Add Availability </h1>
-<code> Please make sure that you are having the correct information</code>
+  <article class="message">
+      <div class="message-header ">
+        <p> Add Availability</p>
+        <code> Please make sure that you are having the correct information</code>
+      </div>
+  </article>
+
 {% if user.is_authenticated %}
   <form action ="" method="POST">
   {% csrf_token %}

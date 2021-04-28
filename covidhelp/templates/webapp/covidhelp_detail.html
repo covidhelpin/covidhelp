@@ -6,6 +6,21 @@
 
 {% block content_body %}
 
+<div class ="columns">
+  <div class="column">
+    <article class="message">
+        <div class="message-header ">
+          <p>Patient Details : <a id="available" class="subtitle" href="{% url 'available_lists' %}">{{object.patient_name}}</a> </p>
+          {% ifequal request.user object.created_by %}
+          	<a href="{% url "update_patient" object.pk %}" class="button is-small is-rounded">Edit</a>
+          {% endifequal %}
+        </div>
+    </article>
+  </div>
+</div>
+
+
+
 <table class="table">
   <tr>
       <td>Patient Name</td><td>{{object.patient_name}}</td>
@@ -44,7 +59,10 @@
       <td>Status of this request</td><td>{{object.get_status_display}}</td>
   </tr>
   <tr>
-      <td>Date Created</td><td>{{object.date}}</td>
+      <td>Date Created</td>
+        <td>{{object.date}}<br>
+        Created by : {{object.created_by}}
+      </td>
   </tr>
   <tr>
       <td>Additional Details</td><td>{{object.additional_text|urlize|linebreaksbr}}</td>
@@ -52,6 +70,6 @@
 
 </table>
 
-<a href="{% url "update_patient" object.pk %}">[Edit]</a>
+
 
 {% endblock content_body %}

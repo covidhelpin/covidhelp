@@ -50,18 +50,26 @@
         {% for types in type_list %}
           <section class="available-tab-content">
             {% for item in types.list %}
-            {% if item.verified == "V" %}
-              <div class="tag is-success">
-              {% elif item.verified == "U" %}
-              <div class="tag is-warning">
-              {% else %}
-              <div class="tag is-danger">
-              {% endif %}
-              {{item.get_verified_display}}
-              </div>
-              <a href="{% url "available_details" item.pk %}">{{item}}</a> [{{item.contact_number}}] in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a><br>
-              <small class="is-pulled-right">Last update : {{item.last_verified|timesince}} ago</small>
-              <hr>
+              {% if item.verified == "V" %}
+                <div class="tag is-success">
+                {% elif item.verified == "U" %}
+                <div class="tag is-warning">
+                {% else %}
+                <div class="tag is-danger">
+                {% endif %}
+                {{item.get_verified_display}}
+                </div>
+                <a href="{% url "available_details" item.pk %}">{{item}}</a> [{{item.contact_number}}] in <a href="{% url "available_city_lists" item.location %}">{{item.location}}</a>
+                {% if user.is_authenticated %}
+                  {% ifequal request.user item.created_by %}
+                    <span class="is-size-7">
+                    <small>[<a href="{% url "update_available" item.pk %} ">Edit</a>]</small>
+                    </span>
+                  {% endifequal %}
+                {% endif %}
+                <br>
+                <small class="is-pulled-right">Last update : {{item.last_verified|timesince}} ago by <i>{{item.created_by}}</i></small>
+                <hr>
             {% endfor %}
           </section>
         {% endfor %}
@@ -85,7 +93,15 @@
           </p>
           <hr>
             {% for item in patient_requirements.list %}
-              <a href="{% url "covidhelp_details" item.pk %}">{{item.patient_name}}</a> [{{item.patient_contact_no}}] in {{item.location_city}} <br>
+              <a href="{% url "covidhelp_details" item.pk %}">{{item.patient_name}}</a> [{{item.patient_contact_no}}] in {{item.location_city}}
+              {% if user.is_authenticated %}
+                {% ifequal request.user item.created_by %}
+                  <span class="is-size-7">
+                  <small>[<a href="{% url "update_patient" item.pk %} ">Edit</a>]</small>
+                  </span>
+                {% endifequal %}
+              {% endif %}
+              <br>
               <small>SPO2 : <strong>{{item.patient_sp02_level}}</strong> / BG : <strong>{{item.patient_blood_group}}</strong> / Age : <strong>{{item.patient_age}}</strong></small><br>
               <small class="is-pulled-right">Updated {{item.date|timesince}} ago by <i>{{item.created_by}}</i>.
                 Status is
@@ -125,12 +141,13 @@
 
                 {{item.name}}
                 </a>
+                <small> <i>added by {{item.created_by}}</i></small>
                 {% if user.is_authenticated %}
-
-                  <span class="is-size-7">
-                  <small>[<a href="{% url "update_link" item.pk %}">Edit</a>]</small>
-                  </span>
-
+                  {% ifequal request.user item.created_by %}
+                    <span class="is-size-7">
+                    <small>[<a href="{% url "update_link" item.pk %}">Edit</a>]</small>
+                    </span>
+                  {% endifequal %}
                 {% endif %}
               </li>
             {% endfor %}
