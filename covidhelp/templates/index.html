@@ -120,16 +120,17 @@
     </div>                <!-- Required end -->
 
     <div class="column is-one-third"">  <!-- Links start -->
+      {% regroup link_list by category as links %}
       <!-- header -->
       <article class="message">
         <div class="message-header">
-          <p><a id="links" class="subtitle"> Useful Links </a> </p>
+          <p><a id="links" class="subtitle"> Useful Links </a> <span class="tag">{{link_list|length}}</span></p>
           <a href="{% url "add_link" %}" class="button is-small is-rounded">+ Add</a>
           </div>
       </article>
       <!-- content -->
       <div class="content">
-        {% regroup link_list by category as links %}
+
         {% for link in links %}
         <p class="panel-block">
           <b>{{link.grouper}}</b>
