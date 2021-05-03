@@ -32,6 +32,11 @@
               <p class="panel-heading">
                 <b id="{{types.grouper}}">{{types.grouper}} </b>
                 </p>
+                {% if types.grouper.description %}
+                <p class="panel-block has-background-warning-light is-size-7 ">
+                  {{types.grouper.description|urlize}}
+                </p>
+                {% endif %}
 
               {% for item in types.list %}
               <div>
