@@ -26,6 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('accounts/',include('allauth.urls')),
+
+    path('elangar/', include('food.urls')),
+
     path('logout',LogoutView.as_view(), name="logout"),
 
     path('', HomeView, name="home"),
@@ -48,5 +51,7 @@ urlpatterns = [
     path('city/<location>', AvailableCityListView.as_view(), name="available_city_lists"),
 
     path('terms-and-conditions',TermsView, name="terms-and-conditions"),
+
+
 
 ]

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content_heading %} ELangar {% endblock content_heading %}
+
+{% block content_menu %} {% endblock content_menu %}
+
+{% block content_body %}
+
+<section class=section>
+
+<div class="columns">
+  <div class="column">
+    The ELangar aims to help people connect for getting and giving food during these hard times.
+  </div>
+</div>
+
+{% if is_volunteer %}
+
+  Thank you for being a Volunteer  !
+
+  Your details are :
+  <table class="table">
+    <tr><td>Name </td>           <td>{{is_volunteer.name}}</td> </tr>
+    <tr><td>Pin Code</td>        <td>{{is_volunteer.pin_code}}</td></tr>
+    <tr><td>Phone</td>           <td>{{is_volunteer.phone }}</td></tr>
+  </table>
+
+  {% if is_volunteer.approved %}
+
+  Following are the customers needing food in your locality:
+
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Adhaar</th>
+      <th>Phone</th>
+      <th>Pin</th>
+      <th>Approved</th>
+    </tr>
+  {% for customer in pin_code_customers %}
+
+    <tr>
+      <td>{{customer.name}}</td>
+      <td>{{customer.adhaar}}</td>
+      <td>{{customer.phone}}</td>
+      <td>{{customer.pin_code}}</td>
+      <td>{{customer.approved}}</td>
+    </tr>
+
+  {% endfor %}
+  </table>
+  {% else %}
+
+  You are not yet approved. You will see list of people requiring help below once a moderator has approved you.
+
+  {% endif %}
+
+{% elif is_customer %}
+
+Hi {{user}}, you are registered with us as a Customer !
+
+Your details are:
+
+  <table>
+    <tr><td>Name </td>           <td>{{is_customer.name}}</td> </tr>
+    <tr><td>Adhaar</td>           <td>{{is_customer.adhaar}}</td></tr>
+    <tr><td>Pin Code</td>         <td>{{is_customer.pin_code}}</td></tr>
+    <tr><td>Tiffins required</td> <td>{{is_customer.tiffin_nos}}</td></tr>
+    <tr><td>Phone</td>            <td>{{is_customer.phone }}</td></tr>
+  </table>
+  {% if approved %}
+  You are <b>approved</b> and someone will get in touch with you.
+  {% else %}
+  You are currently <b>unapproved</b> and a volunteer will get in touch with you as soon as possible.
+  {% endif %}
+
+
+{% elif is_donor %}
+
+Hi {{user}}, you are registered with us as a Donor !
+
+Your details are:
+Your details are :
+<table class="table">
+  <tr><td>Name </td>           <td>{{is_donor.name}}</td> </tr>
+  <tr><td>Phone</td>           <td>{{is_donor.phone }}</td></tr>
+</table>
+{% else %}
+
+<div class ="columns">
+  <div class="column">
+    <a href="{% url "add_customer" %}" class="button has-background-danger">I need help</a>
+  </div>
+  <div class="column">
+    <a href="{% url "add_volunteer" %}" class="button has-background-success">I want to be a volunteer</a>
+  </div>
+  <div class="column">
+    <a href="{% url "add_donor" %}" class="button has-background-warning">I want to donate and help</a>
+  </div>
+</div>
+
+{% endif %}
+
+</section>
+
+
+
+
+
+{% endblock content_body %}

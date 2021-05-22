@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content_heading %} Add Patient Details {% endblock content_heading %}
+
+{% block content_menu %} {% endblock content_menu %}
+
+{% block content_body %}
+
+ Hi <b>{{user|capfirst}}</b> ! You are adding yourself as a Volunteer. 
+
+  <form action ="" method="POST">
+  {% csrf_token %}
+  <table class="table">
+  {{form.as_table}}
+  </table>
+
+  <button type="submit"> Submit</button>
+  </form>
+
+
+{% endblock content_body %}
